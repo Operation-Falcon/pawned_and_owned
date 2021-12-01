@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Pawned and owned</title>
+</head>
+
+<body>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+
+    <!--Header-->
+
+    <div class="container-fluid px-0">
+        <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+                <li class="nav-item px-4"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item px-4"><a href="/domain" class="nav-link">Domain search</a></li>
+                <li class="nav-item px-4"><a href="/pawned" class="nav-link">Who's been pawned ?</a></li>
+                <li class="nav-item px-4"><a href="/about" class="nav-link">About</a></li>
+
+                {% if user.is_authenticated %}
+
+                <li class="nav-item px-4"><a href="/logoutuser" class="nav-link">{{user}}</a></li>
+
+                {% else %}
+
+                <!-- Button to trigger login modal -->
+                <div class="px-4">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        Login
+                    </button>
+                </div>
+
+                <!-- login Modal -->
+                <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="/loginuser">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Button to trigger signup modal -->
+                <div class="px-4">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
+                        Sign up
+                    </button>
+                </div>
+
+                <!-- signup Modal -->
+                <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="signupModalLabel">Signup</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="/signuser">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="firstname" class="form-label">Firstname</label>
+                                        <input type="text" class="form-control" id="firstname" name="firstname">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="lastname" class="form-label">Lastname</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="email" name="email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password1" class="form-label">Enter your Password</label>
+                                        <input type="password" class="form-control" id="password1" name="password1">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="password2" class="form-label">Enter your Password again</label>
+                                        <input type="password" class="form-control" id="password2" name="password2">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endif %}
+
+
+            </ul>
+        </header>
+
+
+        {% for message in messages %}
+
+        <div class="py-0 mb-0 ">
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>Message :</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+    </div>
+
+    <!--Content-->
+
+    {% block content %}
+
+
+    {% endblock content %}
+
+
+
+    <!--Footer-->
+
+    <div class="container-fluid  bg-dark py-4 px-4">
+        <div class="row pwnedSummaryRow text-align text-light text-center">
+            <div class="col-sm-3"><span class="pwnSummaryCount"></span><br>pwned websites</div>
+            <div class="col-sm-3"><span class="pwnSummaryCount"></span><br>pwned accounts</div>
+            <div class="col-sm-3"><span class="pwnSummaryCount"></span><br>pastes</div>
+            <div class="col-sm-3"><span class="pwnSummaryCount"></span><br>paste accounts</div>
+        </div>
+        <hr>
+    </div>
+
+
+</body>
+
+</html>

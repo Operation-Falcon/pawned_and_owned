@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid section1">
+    <div>
+        <h1><b>Pawned and owned</b></h1>
+        <h4><b>Check if your email or phone is in a data breach</b></h4>
+    </div>
+</div>
+
+
+<div class="section2 mt-4 mb-4 py-4 mt-4 mb-4">
+    <div class="container">
+        <div id="searchContainer" class="secondaryHeader">
+            <div class="container">
+                <form action="/" method="post" novalidate="novalidate">
+                {% csrf_token %}
+                    <div class="input-group">
+                        <input autocapitalize="off" autocorrect="off" class="form-control" data-val="true" data-val-maxlength="The field Account must be a string or array type with a maximum length of '255'." data-val-maxlength-max="255" data-val-minlength="The field Account must be a string or array type with a minimum length of '3'." data-val-minlength-min="3" id="Account" maxlength="255" name="Account" placeholder="email or phone (international format)" spellcheck="false" type="email" value="">
+                        <input type="hidden" name="apiEndpoint" id="apiEndpoint">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-lg" type="submit" id="searchPwnage">pawned?</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    
+    .section1 {
+        width: 100%;
+        height: 75vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://source.unsplash.com/900x350/?coding);
+        background-size: cover;
+        background-position: center ;
+        color: white;
+    }
+</style>
+
+{% endblock content %}
