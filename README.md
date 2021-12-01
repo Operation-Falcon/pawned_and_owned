@@ -60,6 +60,6 @@ For support, contact me over linkeding Deepanjal kumar
   
 ## Contributing
 
-Contributions are always welcome
+Contributions are always welcome!
 
 
